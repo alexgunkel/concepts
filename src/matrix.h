@@ -15,19 +15,22 @@ requires SemiRing<T, Addition, Multiplication>
   storage _m;
 
  public:
+  constexpr static int width{X};
+  constexpr static int height{Y};
+
   Matrix(const storage &i) : _m{i} {};
   constexpr Matrix() {
     std::fill(_m.begin(), _m.end(), std::array<T, X>{T{}});
   };
 
   template <int OX, int OY>
-  requires(std::equal_to{}(X, OY)) Matrix<T, OX, Y, Addition, Multiplication>
+  requires(std::equal_to{}(width, OY)) Matrix<T, OX, Y, Addition, Multiplication>
   operator*(const Matrix<T, OX, OY, Addition, Multiplication> &other) const {
-    std::array<std::array<T, OX>, Y> res;
-    for (int i = 0; i < Y; ++i) {
+    std::array<std::array<T, OX>, X> res;
+    for (int i = 0; i < this->height; ++i) {
       for (int j = 0; j < OX; ++j) {
         res[i][j] = T{};
-        for (int k = 0; k < X; ++k) {
+        for (int k = 0; k < this->width; ++k) {
           res[i][j] = Addition{}(
               res[i][j], Multiplication{}(this->get(k, i), other.get(j, k)));
         }

@@ -3,10 +3,9 @@
 #include "gtest/gtest.h"
 
 class Irregular {
-    int i;
 public:
     //Irregular() = delete;
-    Irregular(const int &v): i{v} {};
+    Irregular(const int &v) {};
     Irregular(const Irregular &) = delete;
     //Irregular(const Irregular &&) = delete;
     Irregular &operator=(const Irregular &) = default;

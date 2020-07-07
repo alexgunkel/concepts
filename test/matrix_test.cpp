@@ -18,6 +18,7 @@ TEST(MatrixTest, testBooleans) {
       {{{true, false}, {true, true}}}};
 
   auto m2 = m1 * m1;
+  ASSERT_EQ(m2, m1 * m1);
 }
 
 TEST(MatrixTest, testNesting) {
